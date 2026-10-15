@@ -1,0 +1,7 @@
+__pycache__/
+.test-tmp/
+*.py[cod]
+/data/
+/verify-data*/
+/january.csv
+/period.csv
