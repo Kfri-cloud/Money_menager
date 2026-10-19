@@ -1,0 +1,878 @@
+[
+  {
+    "label": "초기 목록",
+    "args": [
+      "list"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "거래 없음 (0건)\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "저장 CSV 네 개",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "카테고리 추가",
+    "args": [
+      "category",
+      "add"
+    ],
+    "inputs": [
+      "검증분류"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "카테고리 이름: [완료] category add\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "재실행 카테고리 유지",
+    "args": [
+      "category",
+      "list"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "급여\n용돈\n기타수입\n식비\n교통\n주거\n생활용품\n여가\n기타지출\n검증분류\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "지출 추가",
+    "args": [
+      "add"
+    ],
+    "inputs": [
+      "2026-10-19",
+      "expense",
+      "검증분류",
+      "120000",
+      "점심 검증",
+      "Meal,friend"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "카테고리: 급여, 용돈, 기타수입, 식비, 교통, 주거, 생활용품, 여가, 기타지출, 검증분류\n날짜 (YYYY-MM-DD): 종류 (income/expense): 카테고리: 금액: 메모 (선택): 태그 (쉼표 구분, 선택): [저장 완료] TX-000001\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "수입 추가",
+    "args": [
+      "add"
+    ],
+    "inputs": [
+      "2026-10-01",
+      "income",
+      "급여",
+      "300000",
+      "월급",
+      ""
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "카테고리: 급여, 용돈, 기타수입, 식비, 교통, 주거, 생활용품, 여가, 기타지출, 검증분류\n날짜 (YYYY-MM-DD): 종류 (income/expense): 카테고리: 금액: 메모 (선택): 태그 (쉼표 구분, 선택): [저장 완료] TX-000002\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "재실행 거래 유지",
+    "args": [
+      "list"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "TX-000002 | 2026-10-01 | income | 급여 | 300,000원 | 월급 | \nTX-000001 | 2026-10-19 | expense | 검증분류 | 120,000원 | 점심 검증 | Meal,friend\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "조건 AND 검색",
+    "args": [
+      "search",
+      "--from",
+      "2026-10-19",
+      "--to",
+      "2026-10-19",
+      "--category",
+      "검증분류",
+      "--type",
+      "expense",
+      "--q",
+      "점심",
+      "--tags",
+      "meal,FRIEND"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "TX-000001 | 2026-10-19 | expense | 검증분류 | 120,000원 | 점심 검증 | Meal,friend\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "검색 불일치 거래 제외",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "미설정 예산 요약",
+    "args": [
+      "summary",
+      "--month",
+      "2026-10"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "총 수입: 300,000원\n총 지출: 120,000원\n잔액: 180,000원\n예산 미설정\n지출 TOP 5\n검증분류: 120,000원\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "예산 설정",
+    "args": [
+      "budget",
+      "set",
+      "--month",
+      "2026-10"
+    ],
+    "inputs": [
+      "100000"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "예산 금액 (0 이상 정수): [예산 변경] 미설정 → 100000원\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "재실행 예산 유지",
+    "args": [
+      "budget",
+      "get",
+      "--month",
+      "2026-10"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "예산: 100,000원\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "사용률 및 초과",
+    "args": [
+      "summary",
+      "--month",
+      "2026-10"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "총 수입: 300,000원\n총 지출: 120,000원\n잔액: 180,000원\n예산: 100,000원\n사용률 120.0%\n[경고] 예산 초과\n지출 TOP 5\n검증분류: 120,000원\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "0원 예산 설정",
+    "args": [
+      "budget",
+      "set",
+      "--month",
+      "2026-11"
+    ],
+    "inputs": [
+      "0"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "예산 금액 (0 이상 정수): [예산 변경] 미설정 → 0원\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "0원 예산 요약",
+    "args": [
+      "summary",
+      "--month",
+      "2026-11"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "거래 없음\n총 수입: 0원\n총 지출: 0원\n잔액: 0원\n예산: 0원\n계산 불가 — 예산 0원\n지출 TOP 5\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "사용 중 카테고리 삭제 차단",
+    "args": [
+      "category",
+      "delete"
+    ],
+    "inputs": [
+      "검증분류"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 3,
+    "code": 3,
+    "stdout": "카테고리 이름: ",
+    "stderr": "[오류] 사용 중인 카테고리: 검증분류\n[힌트] 해당 거래를 수정·삭제하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "카테고리 삭제 실패 원본 유지",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "미사용 카테고리 추가",
+    "args": [
+      "category",
+      "add"
+    ],
+    "inputs": [
+      "삭제대상"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "카테고리 이름: [완료] category add\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "미사용 카테고리 삭제",
+    "args": [
+      "category",
+      "delete"
+    ],
+    "inputs": [
+      "삭제대상"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "카테고리 이름: [완료] category delete\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "카테고리 삭제 재확인",
+    "args": [
+      "category",
+      "list"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "급여\n용돈\n기타수입\n식비\n교통\n주거\n생활용품\n여가\n기타지출\n검증분류\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "미사용 카테고리 제거 확인",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "remove 명령 지원 여부",
+    "args": [
+      "category",
+      "remove"
+    ],
+    "inputs": [
+      "삭제대상"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 2,
+    "code": 2,
+    "stdout": "",
+    "stderr": "[오류] argument action: invalid choice: 'remove' (choose from 'add', 'list', 'delete')\n[힌트] python.exe -m budget_app category --help로 사용법을 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "거래 수정",
+    "args": [
+      "update",
+      "--id",
+      "TX-000001"
+    ],
+    "inputs": [
+      "",
+      "",
+      "",
+      "125000",
+      "수정 메모",
+      "",
+      "y"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "수정 전:\nTX-000001 | 2026-10-19 | expense | 검증분류 | 120,000원 | 점심 검증 | Meal,friend\ndate [2026-10-19] (Enter 유지): type [expense] (Enter 유지): category [검증분류] (Enter 유지): amount [120000] (Enter 유지): memo [점심 검증] (Enter 유지, :clear로 비우기): tags [Meal,friend] (Enter 유지, :clear로 비우기): 수정 후:\nTX-000001 | 2026-10-19 | expense | 검증분류 | 125,000원 | 수정 메모 | Meal,friend\n저장할까요? (y/yes): [수정 완료] TX-000001\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "수정 재실행 확인",
+    "args": [
+      "list"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "TX-000002 | 2026-10-01 | income | 급여 | 300,000원 | 월급 | \nTX-000001 | 2026-10-19 | expense | 검증분류 | 125,000원 | 수정 메모 | Meal,friend\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "특수문자 CSV import",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\special.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "[완료] imported=1\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "월 CSV export",
+    "args": [
+      "export",
+      "--month",
+      "2026-10",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\export.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "[완료] exported=3 (D:\\github\\Money_menager\\.cli-verification-20261019\\export.csv)\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "UTF-8 및 정확한 export 헤더",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "한글 쉼표 따옴표 여러 줄 보존",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "왕복 대상 카테고리 준비",
+    "args": [
+      "category",
+      "add"
+    ],
+    "inputs": [
+      "검증분류"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\roundtrip",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "카테고리 이름: [완료] category add\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "export 결과 재import",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\export.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\roundtrip",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "[완료] imported=3\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "재import 결과 export",
+    "args": [
+      "export",
+      "--from",
+      "2026-10-01",
+      "--to",
+      "2026-10-31",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\roundtrip.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\roundtrip",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "[완료] exported=3 (D:\\github\\Money_menager\\.cli-verification-20261019\\roundtrip.csv)\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "왕복 거래 내용 동일(ID 및 순서 제외)",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "선택 열 생략 import",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\minimal.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "[완료] imported=1\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "BOM 및 추가 열 허용",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\bom-extra.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "[완료] imported=1\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "잘못된 날짜",
+    "args": [
+      "add"
+    ],
+    "inputs": [
+      "2026-02-30",
+      "expense",
+      "식비",
+      "100",
+      "",
+      ""
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 2,
+    "code": 2,
+    "stdout": "카테고리: 급여, 용돈, 기타수입, 식비, 교통, 주거, 생활용품, 여가, 기타지출, 검증분류\n날짜 (YYYY-MM-DD): 종류 (income/expense): 카테고리: 금액: 메모 (선택): 태그 (쉼표 구분, 선택): ",
+    "stderr": "[오류] 잘못된 날짜: 2026-02-30\n[힌트] 실제 존재하는 YYYY-MM-DD 날짜를 입력하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "잘못된 날짜 원본 유지",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "잘못된 금액",
+    "args": [
+      "add"
+    ],
+    "inputs": [
+      "2026-10-19",
+      "expense",
+      "식비",
+      "-1",
+      "",
+      ""
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 2,
+    "code": 2,
+    "stdout": "카테고리: 급여, 용돈, 기타수입, 식비, 교통, 주거, 생활용품, 여가, 기타지출, 검증분류\n날짜 (YYYY-MM-DD): 종류 (income/expense): 카테고리: 금액: 메모 (선택): 태그 (쉼표 구분, 선택): ",
+    "stderr": "[오류] 정수가 필요합니다: -1\n[힌트] 입력값과 --help를 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "잘못된 금액 원본 유지",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "미등록 카테고리",
+    "args": [
+      "add"
+    ],
+    "inputs": [
+      "2026-10-19",
+      "expense",
+      "미등록",
+      "100",
+      "",
+      ""
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 3,
+    "code": 3,
+    "stdout": "카테고리: 급여, 용돈, 기타수입, 식비, 교통, 주거, 생활용품, 여가, 기타지출, 검증분류\n날짜 (YYYY-MM-DD): 종류 (income/expense): 카테고리: 금액: 메모 (선택): 태그 (쉼표 구분, 선택): ",
+    "stderr": "[오류] 미등록 카테고리: 미등록\n[힌트] category add로 먼저 등록하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "미등록 카테고리 원본 유지",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "잘못된 ID",
+    "args": [
+      "delete",
+      "--id",
+      "bad"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 2,
+    "code": 2,
+    "stdout": "",
+    "stderr": "[오류] 잘못된 거래 ID: bad\n[힌트] 입력값과 --help를 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "없는 ID",
+    "args": [
+      "delete",
+      "--id",
+      "TX-999999"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 3,
+    "code": 3,
+    "stdout": "",
+    "stderr": "[오류] 없는 ID: TX-999999\n[힌트] list로 ID를 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "잘못된 인자",
+    "args": [
+      "list",
+      "--unknown"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 2,
+    "code": 2,
+    "stdout": "",
+    "stderr": "[오류] unrecognized arguments: --unknown\n[힌트] python.exe -m budget_app --help로 사용법을 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "잘못된 limit",
+    "args": [
+      "list",
+      "--limit",
+      "0"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 2,
+    "code": 2,
+    "stdout": "",
+    "stderr": "[오류] argument --limit: invalid validate_amount value: '0'\n[힌트] python.exe -m budget_app list --help로 사용법을 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "없는 파일",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\missing.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 4,
+    "code": 4,
+    "stdout": "",
+    "stderr": "[오류] 파일 접근·저장 실패: [Errno 2] No such file or directory: 'D:\\\\github\\\\Money_menager\\\\.cli-verification-20261019\\\\missing.csv'\n[힌트] 경로·권한·여유 공간을 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "수정 검증 실패",
+    "args": [
+      "update",
+      "--id",
+      "TX-000001"
+    ],
+    "inputs": [
+      "",
+      "",
+      "",
+      "-1",
+      "",
+      ""
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 2,
+    "code": 2,
+    "stdout": "수정 전:\nTX-000001 | 2026-10-19 | expense | 검증분류 | 125,000원 | 수정 메모 | Meal,friend\ndate [2026-10-19] (Enter 유지): type [expense] (Enter 유지): category [검증분류] (Enter 유지): amount [125000] (Enter 유지): memo [수정 메모] (Enter 유지, :clear로 비우기): tags [Meal,friend] (Enter 유지, :clear로 비우기): ",
+    "stderr": "[오류] 정수가 필요합니다: -1\n[힌트] 입력값과 --help를 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "실패 update 원본 유지",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "없는 거래 삭제 실패",
+    "args": [
+      "delete",
+      "--id",
+      "TX-999999"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 3,
+    "code": 3,
+    "stdout": "",
+    "stderr": "[오류] 없는 ID: TX-999999\n[힌트] list로 ID를 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "실패 delete 원본 유지",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "깨진 값",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\bad-value.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 5,
+    "code": 5,
+    "stdout": "",
+    "stderr": "[오류] D:\\github\\Money_menager\\.cli-verification-20261019\\bad-value.csv 레코드 2: 정수가 필요합니다: bad\n[힌트] 원본을 백업한 뒤 해당 CSV를 복구하세요. 임의 초기화하지 마세요.\n",
+    "passed": true
+  },
+  {
+    "label": "깨진 값 import 전체 롤백",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "필수 헤더 누락",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\bad-header.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 5,
+    "code": 5,
+    "stdout": "",
+    "stderr": "[오류] D:\\github\\Money_menager\\.cli-verification-20261019\\bad-header.csv: 헤더가 잘못되었습니다. 필요 열: ['date', 'type', 'category', 'amount', 'memo', 'tags']\n[힌트] 원본을 백업한 뒤 해당 CSV를 복구하세요. 임의 초기화하지 마세요.\n",
+    "passed": true
+  },
+  {
+    "label": "필수 헤더 누락 import 전체 롤백",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "잘못된 UTF-8",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\bad-utf8.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 5,
+    "code": 5,
+    "stdout": "",
+    "stderr": "[오류] D:\\github\\Money_menager\\.cli-verification-20261019\\bad-utf8.csv 레코드 1, 파서 줄 0: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\n[힌트] 원본을 백업한 뒤 해당 CSV를 복구하세요. 임의 초기화하지 마세요.\n",
+    "passed": true
+  },
+  {
+    "label": "인코딩 오류 원본 유지",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "잠금 update",
+    "args": [
+      "update",
+      "--id",
+      "TX-000001"
+    ],
+    "inputs": [
+      "",
+      "",
+      "",
+      "130000",
+      "",
+      "",
+      "y"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 4,
+    "code": 4,
+    "stdout": "수정 전:\nTX-000001 | 2026-10-19 | expense | 검증분류 | 125,000원 | 수정 메모 | Meal,friend\ndate [2026-10-19] (Enter 유지): type [expense] (Enter 유지): category [검증분류] (Enter 유지): amount [125000] (Enter 유지): memo [수정 메모] (Enter 유지, :clear로 비우기): tags [Meal,friend] (Enter 유지, :clear로 비우기): 수정 후:\nTX-000001 | 2026-10-19 | expense | 검증분류 | 130,000원 | 수정 메모 | Meal,friend\n저장할까요? (y/yes): ",
+    "stderr": "[오류] 파일 접근·저장 실패: [WinError 5] 액세스가 거부되었습니다: 'D:\\\\github\\\\Money_menager\\\\.cli-verification-20261019\\\\cases\\\\.budget-mifnnxp9' -> 'D:\\\\github\\\\Money_menager\\\\.cli-verification-20261019\\\\cases\\\\transactions.csv'\n[힌트] 경로·권한·여유 공간을 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "잠금 update 거래 원본 보존",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "잠금 delete",
+    "args": [
+      "delete",
+      "--id",
+      "TX-000001"
+    ],
+    "inputs": [
+      "y"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 4,
+    "code": 4,
+    "stdout": "TX-000001 | 2026-10-19 | expense | 검증분류 | 125,000원 | 수정 메모 | Meal,friend\n저장할까요? (y/yes): ",
+    "stderr": "[오류] 파일 접근·저장 실패: [WinError 5] 액세스가 거부되었습니다: 'D:\\\\github\\\\Money_menager\\\\.cli-verification-20261019\\\\cases\\\\.budget-7cjriryd' -> 'D:\\\\github\\\\Money_menager\\\\.cli-verification-20261019\\\\cases\\\\transactions.csv'\n[힌트] 경로·권한·여유 공간을 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "잠금 delete 거래 원본 보존",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "잠금 import",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\special.csv"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 4,
+    "code": 4,
+    "stdout": "",
+    "stderr": "[오류] 파일 접근·저장 실패: [WinError 5] 액세스가 거부되었습니다: 'D:\\\\github\\\\Money_menager\\\\.cli-verification-20261019\\\\cases\\\\.budget-6ak2v80a' -> 'D:\\\\github\\\\Money_menager\\\\.cli-verification-20261019\\\\cases\\\\transactions.csv'\n[힌트] 경로·권한·여유 공간을 확인하세요.\n",
+    "passed": true
+  },
+  {
+    "label": "잠금 import 거래 원본 보존",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "거래 삭제",
+    "args": [
+      "delete",
+      "--id",
+      "TX-000001"
+    ],
+    "inputs": [
+      "y"
+    ],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "TX-000001 | 2026-10-19 | expense | 검증분류 | 125,000원 | 수정 메모 | Meal,friend\n저장할까요? (y/yes): [삭제 완료] TX-000001\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "삭제 재실행 확인",
+    "args": [
+      "list"
+    ],
+    "inputs": [],
+    "data": "D:\\github\\Money_menager\\.cli-verification-20261019\\cases",
+    "expected_code": 0,
+    "code": 0,
+    "stdout": "TX-000005 | 2026-10-20 | expense | 식비 | 1,234원 | 한글, \"따옴표\"\n여러 줄 메모 | 태그,Meal\nTX-000004 | 2026-10-20 | expense | 식비 | 1,234원 |  | \nTX-000003 | 2026-10-20 | expense | 식비 | 1,234원 | 한글, \"따옴표\"\n여러 줄 메모 | 태그,Meal\nTX-000002 | 2026-10-01 | income | 급여 | 300,000원 | 월급 | \n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "label": "삭제 거래 없음",
+    "passed": true,
+    "code": null
+  },
+  {
+    "label": "duplicate-header",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\duplicate-header.csv"
+    ],
+    "code": 5,
+    "stdout": "",
+    "stderr": "[오류] D:\\github\\Money_menager\\.cli-verification-20261019\\duplicate-header.csv: 헤더가 잘못되었습니다. 필요 열: ['date', 'type', 'category', 'amount', 'memo', 'tags']\n[힌트] 원본을 백업한 뒤 해당 CSV를 복구하세요. 임의 초기화하지 마세요.\n",
+    "passed": true
+  },
+  {
+    "label": "column-mismatch",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\column-mismatch.csv"
+    ],
+    "code": 5,
+    "stdout": "",
+    "stderr": "[오류] D:\\github\\Money_menager\\.cli-verification-20261019\\column-mismatch.csv 레코드 1: 열 개수가 헤더와 다릅니다.\n[힌트] 원본을 백업한 뒤 해당 CSV를 복구하세요. 임의 초기화하지 마세요.\n",
+    "passed": true
+  },
+  {
+    "label": "broken-quotes",
+    "args": [
+      "import",
+      "--file",
+      "D:\\github\\Money_menager\\.cli-verification-20261019\\broken-quotes.csv"
+    ],
+    "code": 5,
+    "stdout": "",
+    "stderr": "[오류] D:\\github\\Money_menager\\.cli-verification-20261019\\broken-quotes.csv 레코드 1, 파서 줄 1: unexpected end of data\n[힌트] 원본을 백업한 뒤 해당 CSV를 복구하세요. 임의 초기화하지 마세요.\n",
+    "passed": true
+  }
+]

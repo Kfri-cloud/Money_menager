@@ -1,0 +1,3 @@
+﻿date,type,category,amount,memo,tags,extra
+2026-10-20,expense,식비,1234,"한글, ""따옴표""
+여러 줄 메모","태그,Meal",ignored

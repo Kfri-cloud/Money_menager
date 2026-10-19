@@ -1,0 +1,5 @@
+date,type,category,amount,memo,tags
+2026-10-20,expense,식비,1234,"한글, ""따옴표""
+여러 줄 메모","태그,Meal"
+2026-10-01,income,급여,300000,월급,
+2026-10-19,expense,검증분류,125000,수정 메모,"Meal,friend"

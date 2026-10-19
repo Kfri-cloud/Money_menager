@@ -1,0 +1,5 @@
+id,type,date,amount,category,memo,tags
+TX-000003,expense,2026-10-19,125000,검증분류,수정 메모,"Meal,friend"
+TX-000002,income,2026-10-01,300000,급여,월급,
+TX-000001,expense,2026-10-20,1234,식비,"한글, ""따옴표""
+여러 줄 메모","태그,Meal"
