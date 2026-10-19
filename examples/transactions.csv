@@ -1,5 +1,5 @@
-date,type,category,amount,memo,tags
-2024-01-15,expense,food,5000,"친구와 점심, 분식","meal,lunch"
-2024-01-01,income,salary,20000,용돈,allowance
-2024-02-01,expense,etc,3000,노트,study
-2024-01-12,expense,transport,1500,버스,commute
+﻿date,type,category,amount,memo,tags
+2026-10-01,income,급여,20000,월급,
+2026-10-12,expense,교통,1500,버스,출근
+2026-10-15,expense,식비,5000,"친구와 점심, 분식","meal,lunch"
+2026-11-01,expense,식비,3000,간식,snack
